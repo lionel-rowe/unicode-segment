@@ -1,6 +1,6 @@
 [project]
 name = "unicode-segment"
-version = "0.0.3"
+version = "0.1.0"
 description = "Segment text with Unicode TR29-compliant segmenters."
 readme = "README.md"
 requires-python = ">=3.9"
