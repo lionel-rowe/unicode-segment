@@ -1,4 +1,4 @@
-from _regex_builder import RegexBuilder
+from unicode_segment._regex_builder import RegexBuilder
 
 regex_builder = RegexBuilder("Word_Break", ["Extend", "Format", "ZWJ"])
 b = regex_builder.b

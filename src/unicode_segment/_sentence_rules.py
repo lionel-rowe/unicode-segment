@@ -1,4 +1,4 @@
-from _regex_builder import RegexBuilder
+from unicode_segment._regex_builder import RegexBuilder
 
 regex_builder = RegexBuilder("Sentence_Break", ["Extend", "Format"])
 b = regex_builder.b

@@ -1,5 +1,5 @@
 import regex
-from _segmenter import Segmenter
+from unicode_segment._segmenter import Segmenter
 
 alphabet = "".join([chr(i) for i in range(ord("a"), ord("z") + 1)])
 r = regex.compile(r"(?<=\[)[\d.]+(?=\])")

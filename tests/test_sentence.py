@@ -1,4 +1,4 @@
-from src.sentence import SentenceSegmenter
+from src.unicode_segment.sentence import SentenceSegmenter
 from tests._run_segmenter_tests import run_segmenter_unicode_break_tests
 
 segmenter = SentenceSegmenter()
