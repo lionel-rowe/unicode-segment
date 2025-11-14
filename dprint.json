@@ -1,0 +1,8 @@
+{
+  "excludes": [
+    "**/*-lock.json"
+  ],
+  "plugins": [
+    "https://plugins.dprint.dev/ruff-0.6.4.wasm"
+  ]
+}
