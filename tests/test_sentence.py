@@ -16,11 +16,11 @@ def test_sentence_segmenter_basic():
     # Note that the first split is wrong, but it's a known limitation of the Unicode algorithm that it can never
     # give 100% results due to abbreviations etc.
     expected = [
-        '"Dr. ',
-        "John works at I.B.M., doesn't he?\", asked Alice. ",
-        '"Yes," replied Charlie.',
+        (0, '"Dr. '),
+        (5, "John works at I.B.M., doesn't he?\", asked Alice. "),
+        (54, '"Yes," replied Charlie.'),
     ]
-    actual = segmenter.split(text)
+    actual = list(segmenter.segment(text))
     assert actual == expected
 
 
@@ -33,16 +33,16 @@ def test_sentence_segmenter_readme_example():
         ]
     )
 
-    sentences = segmenter.split(text)
+    segments = segmenter.segment(text)
 
-    assert sentences == [
-        "This, that, the other thing, etc. ",
-        "Another sentence... ",
-        "A, b, c, etc., and more. ",
-        "D, e, f, etc. and more. ",
-        "One, i. e. two. ",
-        "Three, i. e., four. ",
-        "Five, i.e. six. ",
-        "You have 4.2 messages. ",
-        "Property access: `a.b.c`.",
+    assert list(segments) == [
+        (0, "This, that, the other thing, etc. "),
+        (34, "Another sentence... "),
+        (54, "A, b, c, etc., and more. "),
+        (79, "D, e, f, etc. and more. "),
+        (103, "One, i. e. two. "),
+        (119, "Three, i. e., four. "),
+        (139, "Five, i.e. six. "),
+        (155, "You have 4.2 messages. "),
+        (178, "Property access: `a.b.c`."),
     ]
