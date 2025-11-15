@@ -2,11 +2,11 @@ import regex
 
 
 class RegexBuilder:
-    def __init__(self, prop_name: str, skip: list[str]):
+    def __init__(self, prop_name: str, skip: set[str]):
         self.prop_name = prop_name
         self.skip = skip
 
-    def build(self, rules) -> regex.Pattern[str]:
+    def build(self, rules) -> regex.Pattern:
         return regex.compile("|".join(rules), regex.V1 | regex.DOTALL)
 
     def b(self, *names: str, negate=False) -> str:

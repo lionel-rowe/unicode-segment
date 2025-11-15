@@ -1,6 +1,6 @@
 from unicode_segment._regex_builder import RegexBuilder
 
-regex_builder = RegexBuilder("Sentence_Break", ["Extend", "Format"])
+regex_builder = RegexBuilder("Sentence_Break", {"Extend", "Format"})
 b = regex_builder.b
 bx = regex_builder.bx
 
@@ -41,4 +41,4 @@ rules = [
 break_matcher = regex_builder.build(rules)
 
 # "÷" = break opportunity; "×" = no break opportunity
-break_rule_keys = ["SB1", "SB2", "SB4", "SB11"]
+break_rule_keys = {"SB1", "SB2", "SB4", "SB11"}

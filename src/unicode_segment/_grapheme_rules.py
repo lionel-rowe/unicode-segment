@@ -1,6 +1,6 @@
 from unicode_segment._regex_builder import RegexBuilder
 
-regex_builder = RegexBuilder("Grapheme_Cluster_Break", [])
+regex_builder = RegexBuilder("Grapheme_Cluster_Break", {*()})
 b = regex_builder.b
 bx = regex_builder.bx
 
@@ -42,4 +42,4 @@ rules = [
 
 break_matcher = regex_builder.build(rules)
 
-break_rule_keys = ["GB1", "GB2", "GB4", "GB5", "GB999"]
+break_rule_keys = {"GB1", "GB2", "GB4", "GB5", "GB999"}

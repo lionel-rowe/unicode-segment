@@ -27,12 +27,6 @@ classifiers = [
     "Topic :: Software Development :: Localization",
 ]
 
-[project.optional-dependencies]
-dev = []
-test = [
-    "pytest>=8.4.2",
-]
-
 [project.urls]
 "Homepage" = "https://github.com/lionel-rowe/unicode-segment"
 "Bug Reports" = "https://github.com/lionel-rowe/unicode-segment/issues"
@@ -41,3 +35,12 @@ test = [
 [build-system]
 requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
+
+[dependency-groups]
+dev = [
+    "faker>=37.12.0",
+    "mypy>=1.18.2",
+    "pytest>=8.4.2",
+    "pytest-benchmark>=5.2.3",
+    "types-regex>=2025.11.3.20251106",
+]

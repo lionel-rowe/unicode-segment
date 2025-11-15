@@ -1,6 +1,6 @@
 from unicode_segment._regex_builder import RegexBuilder
 
-regex_builder = RegexBuilder("Word_Break", ["Extend", "Format", "ZWJ"])
+regex_builder = RegexBuilder("Word_Break", {"Extend", "Format", "ZWJ"})
 b = regex_builder.b
 bx = regex_builder.bx
 
@@ -65,4 +65,4 @@ rules = [
 break_matcher = regex_builder.build(rules)
 
 # "÷" = break opportunity; "×" = no break opportunity
-break_rule_keys = ["WB1", "WB2", "WB3a", "WB3b", "WB999"]
+break_rule_keys = {"WB1", "WB2", "WB3a", "WB3b", "WB999"}
