@@ -1,5 +1,5 @@
 test:
-	uv run pytest --mypy --benchmark-autosave
+	deno run -A ./tests/watch.ts
 
 publish:
 	rm dist/* 2>/dev/null || true \
@@ -8,6 +8,9 @@ publish:
 
 fmt:
 	dprint fmt
+
+benchmark-save:
+	uv run pytest --mypy --benchmark-autosave
 
 benchmark-compare:
 	uv run pytest-benchmark compare --group-by func
