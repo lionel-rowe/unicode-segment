@@ -9,6 +9,11 @@ def run_benchmark(benchmark, segmenter: Segmenter):
     faker = Faker()
     faker.seed_instance(SEED)
 
+    with open(
+        f".benchmarks/regexes/{segmenter.__class__.__name__}.txt", "w", encoding="utf-8"
+    ) as f:
+        f.write(f"{segmenter._break_matcher.pattern}\n")
+
     def run_test(text: str):
         list(segmenter.segment(text))
 

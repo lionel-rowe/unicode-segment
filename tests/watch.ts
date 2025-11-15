@@ -14,11 +14,17 @@ const includeGlobs = [
 	'**/*.txt',
 ].map((g) => globToRegExp(g))
 
+let ac = new AbortController()
+
 const test = debounce(async () => {
+	ac.abort()
+	ac = new AbortController()
+
 	await new Deno.Command(
 		'uv',
 		{
 			args: ['run', 'pytest', '--mypy', '--ruff'],
+			signal: ac.signal,
 		},
 	).spawn().output()
 
