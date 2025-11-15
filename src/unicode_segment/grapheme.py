@@ -1,5 +1,5 @@
 from ._segmenter import Segmenter
-from ._grapheme_rules import break_rule_keys, break_matcher
+from ._grapheme_rules import _config
 
 
 class GraphemeSegmenter(Segmenter):
@@ -8,5 +8,4 @@ class GraphemeSegmenter(Segmenter):
     compliant grapheme segmenter
     """
 
-    _break_rule_keys = break_rule_keys
-    _break_matcher = break_matcher
+    _config = _config

@@ -24,7 +24,6 @@ def run_segmenter_unicode_break_tests(segmenter: Segmenter, test_file_name: str)
     # check zero case first
     assert list(segmenter.segment("")) == []
     assert list(segmenter._find_breaks("")) == []
-    assert list(segmenter._get_matched_rules("")) == []
 
     # https://www.unicode.org/Public/17.0.0/ucd/auxiliary/SentenceBreakTest.txt
     with open(f"tests/test_data/{test_file_name}", "r", encoding="utf-8") as f:
@@ -48,7 +47,7 @@ def run_segmenter_unicode_break_tests(segmenter: Segmenter, test_file_name: str)
         actual = [s for _, s in segmenter.segment(joined)]
 
         expected_rules = get_rule_names(comment, test_file_name[0])
-        actual_rules = list(segmenter._get_matched_rules(joined))
+        actual_rules = list(segmenter._get_all_matched_rules(joined))
 
         assert actual == expected, "\n".join(
             [

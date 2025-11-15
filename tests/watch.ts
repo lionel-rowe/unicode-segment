@@ -16,16 +16,20 @@ const includeGlobs = [
 
 let ac = new AbortController()
 
+const passThroughArgs = Deno.args[Deno.args.findIndex((arg) => arg === '--args') + 1]?.replace(/--watch/g, '')
+	.replaceAll(/\s+/g, ' ').trim()
+
 const test = debounce(async () => {
 	ac.abort()
 	ac = new AbortController()
+	const args = [
+		'test',
+		`args=${passThroughArgs ?? ''}`,
+	].filter(Boolean)
 
 	await new Deno.Command(
-		'uv',
-		{
-			args: ['run', 'pytest', '--mypy', '--ruff'],
-			signal: ac.signal,
-		},
+		'make',
+		{ args, signal: ac.signal },
 	).spawn().output()
 
 	console.info('Test run complete, watching for changes...')

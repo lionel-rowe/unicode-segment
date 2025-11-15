@@ -1,5 +1,5 @@
 from ._segmenter import Segmenter
-from ._sentence_rules import break_rule_keys, break_matcher
+from ._sentence_rules import _config
 
 
 class SentenceSegmenter(Segmenter):
@@ -8,5 +8,4 @@ class SentenceSegmenter(Segmenter):
     compliant sentence segmenter
     """
 
-    _break_rule_keys = break_rule_keys
-    _break_matcher = break_matcher
+    _config = _config

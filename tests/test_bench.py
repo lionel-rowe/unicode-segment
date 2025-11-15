@@ -12,7 +12,15 @@ def run_benchmark(benchmark, segmenter: Segmenter):
     with open(
         f".benchmarks/regexes/{segmenter.__class__.__name__}.txt", "w", encoding="utf-8"
     ) as f:
-        f.write(f"{segmenter._break_matcher.pattern}\n")
+        f.write(
+            "\n\n".join(
+                [
+                    segmenter._config.break_opportunities_pattern.pattern,
+                    segmenter._config.all_rules_pattern.pattern,
+                ]
+            )
+            + "\n"
+        )
 
     def run_test(text: str):
         list(segmenter.segment(text))

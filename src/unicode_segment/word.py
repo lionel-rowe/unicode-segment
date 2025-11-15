@@ -1,5 +1,5 @@
 from ._segmenter import Segmenter
-from ._word_rules import break_rule_keys, break_matcher
+from ._word_rules import _config
 
 
 class WordSegmenter(Segmenter):
@@ -8,5 +8,4 @@ class WordSegmenter(Segmenter):
     compliant word segmenter
     """
 
-    _break_rule_keys = break_rule_keys
-    _break_matcher = break_matcher
+    _config = _config
