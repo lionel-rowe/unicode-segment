@@ -29,7 +29,7 @@ rules = [
     # GB9b	Prepend	×
     rf"(?<={b('Prepend')})(?<GB9b>)",
     # GB9c	\p{InCB=Consonant} [ \p{InCB=Extend} \p{InCB=Linker} ]* \p{InCB=Linker} [ \p{InCB=Extend} \p{InCB=Linker} ]*	×	\p{InCB=Consonant}
-    rf"(?<=\p{{InCB=Consonant}}[\p{{InCB=Extend}}\p{{InCB=Linker}}]*\p{{InCB=Linker}}[\p{{InCB=Extend}}\p{{InCB=Linker}}]*)(?<GB9c>)(?=\p{{InCB=Consonant}})",
+    r"(?<=\p{InCB=Consonant}[\p{InCB=Extend}\p{InCB=Linker}]*\p{InCB=Linker}[\p{InCB=Extend}\p{InCB=Linker}]*)(?<GB9c>)(?=\p{InCB=Consonant})",
     # GB11	\p{Extended_Pictographic} Extend* ZWJ	×	\p{Extended_Pictographic}
     rf"(?<=\p{{Extended_Pictographic}}{b('Extend')}*{b('ZWJ')})(?<GB11>)(?=\p{{Extended_Pictographic}})",
     # GB12	sot (RI RI)* RI	×	RI

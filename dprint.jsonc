@@ -1,21 +1,24 @@
 {
 	"excludes": [
-		"**/*-lock.json"
+		"**/*-lock.json",
 	],
 	"plugins": [
 		"https://plugins.dprint.dev/ruff-0.6.4.wasm",
 		"https://plugins.dprint.dev/typescript-0.95.12.wasm",
-		"https://plugins.dprint.dev/json-0.21.0.wasm"
+		"https://plugins.dprint.dev/json-0.21.0.wasm",
 	],
 	"typescript": {
 		"semiColons": "asi",
 		"useTabs": true,
 		"lineWidth": 120,
 		"indentWidth": 4,
-		"quoteStyle": "preferSingle"
+		"quoteStyle": "preferSingle",
 	},
 	"json": {
 		"useTabs": true,
-		"indentWidth": 4
-	}
+		"indentWidth": 4,
+	},
+	"ruff": {
+		// Use default (4 spaces) for Python for PEP 8 compatibility
+	},
 }

@@ -42,5 +42,6 @@ dev = [
     "mypy>=1.18.2",
     "pytest>=8.4.2",
     "pytest-benchmark>=5.2.3",
+    "pytest-ruff>=0.5",
     "types-regex>=2025.11.3.20251106",
 ]

@@ -38,4 +38,4 @@ class Segmenter(ABC):
         for i in range(len(text) + 1):
             match = self._break_matcher.match(text, i)
             assert match is not None
-            yield next(x for x in match.groupdict().items() if x[1] != None)[0]
+            yield next(x for x in match.groupdict().items() if x[1] is not None)[0]

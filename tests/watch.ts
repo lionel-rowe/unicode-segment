@@ -9,15 +9,20 @@ const excludeGlobs = [
 	'**/*.pyc',
 	'**/*.egg-info/**',
 ].map((g) => globToRegExp(g))
-const includeGlobs = ['**/*.py', '**/*.txt'].map((g) => globToRegExp(g))
+const includeGlobs = [
+	'**/*.py',
+	'**/*.txt',
+].map((g) => globToRegExp(g))
 
 const test = debounce(async () => {
 	await new Deno.Command(
 		'uv',
 		{
-			args: ['run', 'pytest', '--mypy'],
+			args: ['run', 'pytest', '--mypy', '--ruff'],
 		},
 	).spawn().output()
+
+	console.info('Test run complete, watching for changes...')
 }, DEBOUNCE_MS)
 
 test()

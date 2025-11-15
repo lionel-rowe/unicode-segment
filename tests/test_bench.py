@@ -5,18 +5,17 @@ from faker import Faker
 SEED = 16070459220457221183
 
 
-def run_test(segmenter: Segmenter, text: str):
-    list(segmenter.segment(text))
-
-
 def run_benchmark(benchmark, segmenter: Segmenter):
     faker = Faker()
     faker.seed_instance(SEED)
 
+    def run_test(text: str):
+        list(segmenter.segment(text))
+
     def setup():
         text = faker.text(500)
-        # return args for `run_test`
-        return (segmenter, text), {}
+        # return (args, kwargs) for `run_test`
+        return (text,), {}
 
     benchmark.pedantic(run_test, setup=setup, rounds=100)
 

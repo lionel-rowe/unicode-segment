@@ -1,3 +1,3 @@
-from .sentence import SentenceSegmenter
-from .word import WordSegmenter
-from .grapheme import GraphemeSegmenter
+from .sentence import SentenceSegmenter as SentenceSegmenter
+from .word import WordSegmenter as WordSegmenter
+from .grapheme import GraphemeSegmenter as GraphemeSegmenter
