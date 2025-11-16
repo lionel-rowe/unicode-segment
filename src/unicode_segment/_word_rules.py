@@ -1,6 +1,6 @@
 from unicode_segment._config_builder import ConfigBuilder
 
-config_builder = ConfigBuilder("Word_Break", {"Extend", "Format", "ZWJ"})
+config_builder = ConfigBuilder("Word_Break", {"Extend", "Format", "ZWJ"}, True)
 b = config_builder.b
 bx = config_builder.bx
 

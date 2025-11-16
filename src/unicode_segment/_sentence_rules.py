@@ -1,6 +1,6 @@
 from unicode_segment._config_builder import ConfigBuilder
 
-config_builder = ConfigBuilder("Sentence_Break", {"Extend", "Format"})
+config_builder = ConfigBuilder("Sentence_Break", {"Extend", "Format"}, False)
 b = config_builder.b
 bx = config_builder.bx
 

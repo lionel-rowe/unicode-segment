@@ -1,3 +1,4 @@
+import json
 from unicode_segment import SentenceSegmenter, WordSegmenter, GraphemeSegmenter
 from unicode_segment._segmenter import Segmenter
 from faker import Faker
@@ -10,17 +11,16 @@ def run_benchmark(benchmark, segmenter: Segmenter):
     faker.seed_instance(SEED)
 
     with open(
-        f".benchmarks/regexes/{segmenter.__class__.__name__}.txt", "w", encoding="utf-8"
+        f".benchmarks/regexes/{segmenter.__class__.__name__}.json",
+        "w",
+        encoding="utf-8",
     ) as f:
-        f.write(
-            "\n\n".join(
-                [
-                    segmenter._config.break_opportunities_pattern.pattern,
-                    segmenter._config.all_rules_pattern.pattern,
-                ]
-            )
-            + "\n"
-        )
+        patterns = {
+            "pattern": segmenter._config.pattern.pattern,
+            "debug_pattern": segmenter._config.debug_pattern.pattern,
+        }
+
+        f.write(json.dumps(patterns, indent="\t") + "\n")
 
     def run_test(text: str):
         list(segmenter.segment(text))

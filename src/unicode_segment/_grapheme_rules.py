@@ -1,6 +1,6 @@
 from unicode_segment._config_builder import ConfigBuilder
 
-config_builder = ConfigBuilder("Grapheme_Cluster_Break", {*()})
+config_builder = ConfigBuilder("Grapheme_Cluster_Break", {*()}, True)
 b = config_builder.b
 bx = config_builder.bx
 

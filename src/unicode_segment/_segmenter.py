@@ -1,12 +1,12 @@
-from typing import Iterator
+from typing import Iterable
 
-from regex import Match
+from regex import Match, Pattern
 from unicode_segment._config_builder import Config
 from abc import ABC, abstractmethod
 
 
 class Segmenter(ABC):
-    def segment(self, text: str) -> Iterator[tuple[int, str]]:
+    def segment(self, text: str) -> Iterable[tuple[int, str]]:
         """
         Split into the relevant type of segments at every break opportunity
         """
@@ -23,30 +23,36 @@ class Segmenter(ABC):
     def _config(self) -> Config:
         pass
 
-    def _find_breaks(self, text: str) -> Iterator[int]:
+    def _find_breaks(self, text: str) -> Iterable[int]:
         if not text:
             return
 
-        for i in self._find_break_opportunities(text):
-            match = self._config.all_rules_pattern.match(text, i)
-            assert match is not None
-            x = self._get_matched_rule(match)
-            if x in self._config.break_rules:
+        candidates = (
+            range(len(text) + 1)
+            if self._config.break_candidates_pattern is None
+            else self._find_break_candidates(
+                text, self._config.break_candidates_pattern
+            )
+        )
+
+        for i in candidates:
+            match = self._config.pattern.match(text, i)
+            if match is not None:
                 yield i
 
-    def _find_break_opportunities(self, text: str) -> Iterator[int]:
-        for m in self._config.break_opportunities_pattern.finditer(text):
+    def _find_break_candidates(self, text: str, pattern: Pattern) -> Iterable[int]:
+        for m in pattern.finditer(text):
             yield m.start()
 
     def _get_matched_rule(self, match: Match) -> str:
         return next(x for x in match.groupdict().items() if x[1] is not None)[0]
 
-    # mainly for testing purposes
-    def _get_all_matched_rules(self, text: str) -> Iterator[str]:
+    def _get_all_matched_rules(self, text: str) -> Iterable[str]:
+        """For debugging: yield all matched rules in the text"""
         if not text:
             return
 
         for i in range(len(text) + 1):
-            match = self._config.all_rules_pattern.match(text, i)
+            match = self._config.debug_pattern.match(text, i)
             assert match is not None
             yield self._get_matched_rule(match)
