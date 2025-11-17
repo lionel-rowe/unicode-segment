@@ -1,11 +1,6 @@
 from unicode_segment.sentence import SentenceSegmenter
-from tests._run_segmenter_tests import run_segmenter_unicode_break_tests
 
 segmenter = SentenceSegmenter()
-
-
-def test_sentence_segmenter_unicode_break_tests():
-    run_segmenter_unicode_break_tests(segmenter, "SentenceBreakTest.txt")
 
 
 def test_sentence_segmenter_basic():

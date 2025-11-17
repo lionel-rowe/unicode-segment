@@ -1,8 +1,7 @@
 from typing import Iterable
-
 from regex import Match, Pattern
-from unicode_segment._config_builder import Config
 from abc import ABC, abstractmethod
+from unicode_segment._segmenter_config import SegmenterConfig
 
 
 class Segmenter(ABC):
@@ -20,7 +19,7 @@ class Segmenter(ABC):
 
     @property
     @abstractmethod
-    def _config(self) -> Config:
+    def _config(self) -> SegmenterConfig:
         pass
 
     def _find_breaks(self, text: str) -> Iterable[int]:

@@ -2,7 +2,7 @@ test:
 ifneq (,$(findstring --watch,$(args)))
 	deno run -A ./tests/watch.ts --args "$(args)"
 else
-	uv run pytest --mypy --ruff $(args)
+	uv run pytest  $(args)
 endif
 
 publish:

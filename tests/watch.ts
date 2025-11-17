@@ -20,6 +20,9 @@ const passThroughArgs = Deno.args[Deno.args.findIndex((arg) => arg === '--args')
 	.replaceAll(/\s+/g, ' ').trim()
 
 const test = debounce(async () => {
+	// Reset/clear the console
+	console.log('\x1bc')
+
 	ac.abort()
 	ac = new AbortController()
 	const args = [
