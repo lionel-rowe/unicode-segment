@@ -115,7 +115,6 @@ class RuleParser:
             if isinstance(self.rules, str)
             else self.rules
         )
-        print(rule_lines)
 
         parts = [self.get_parts(rule) for rule in rule_lines]
         rules = self.get_rules(parts)
@@ -175,23 +174,7 @@ class RuleParser:
 
         pattern += ")" * group_depth
 
-        # Debug: print pattern if it's going to fail
-        try:
-            return regex.compile(pattern, flags)
-        except Exception as e:
-            import sys
-
-            print(
-                f"ERROR compiling pattern at position {getattr(e, 'pos', '?')}",
-                file=sys.stderr,
-            )
-            if hasattr(e, "pos") and e.pos is not None:
-                start = max(0, e.pos - 50)
-                end = min(len(pattern), e.pos + 50)
-                print(f"Context: ...{pattern[start:end]}...", file=sys.stderr)
-                print(f"         {' ' * (min(50, e.pos - start))}^", file=sys.stderr)
-            print(f"Full pattern: {pattern}", file=sys.stderr)
-            raise
+        return regex.compile(pattern, flags)
 
     def get_parts(self, rule: str):
         parts = parts_matcher.match(rule)
