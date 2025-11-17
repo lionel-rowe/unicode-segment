@@ -8,7 +8,11 @@ _config: SegmenterConfig | None = None
 class WordSegmenter(Segmenter):
     """
     [Unicode TR29](https://www.unicode.org/reports/tr29/#Word_Boundaries)
-    compliant word segmenter
+    compliant word segmenter.
+
+    Note that this segmenter does not currently include or support any
+    locale-specific tailoring, meaning it may be unsuitable for languages with
+    non-trivial word segmentation rules (e.g., Thai, Japanese).
     """
 
     # Currently, `WordSegmenter` doesn't support locale-specific tailoring. As a result, config is the same for all

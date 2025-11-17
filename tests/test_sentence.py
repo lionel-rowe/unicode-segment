@@ -19,7 +19,7 @@ def test_sentence_segmenter_basic():
     assert actual == expected
 
 
-def test_sentence_segmenter_readme_example():
+def test_sentence_segmenter_motivating_cases():
     text = "".join(
         [
             "This, that, the other thing, etc. Another sentence... A, b, c, etc., and ",

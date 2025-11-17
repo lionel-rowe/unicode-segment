@@ -2,27 +2,71 @@
 
 Segment text with Unicode [TR29](https://www.unicode.org/reports/tr29/)-compliant segmenters.
 
+Currently segmenters are available for grapheme clusters (`GraphemeSegmenter`), words (`WordSegmenter`), and sentences (`SentenceSegmenter`).
+
+Segmenters pass all tests from the Unicode Character Database (UCD) test data files as of Unicode 17.0.0, but do not currently support locale-specific tailoring.
+
 ## Usage
 
 ```py
-from unicode_segment import SentenceSegmenter
-
-text = """This, that, the other thing, etc. Another sentence... A, b, c, \
-etc., and more. D, e, f, etc. and more. One, i. e. two. Three, i. e., four. \
-Five, i.e. six. You have 4.2 messages. Property access: `a.b.c`."""
+from unicode_segment import WordSegmenter, SentenceSegmenter
 
 segmenter = SentenceSegmenter()
-segments = segmenter.segment(text)
 
-assert list(segments) == [
-    (0, "This, that, the other thing, etc. "),
-    (34, "Another sentence... "),
-    (54, "A, b, c, etc., and more. "),
-    (79, "D, e, f, etc. and more. "),
-    (103, "One, i. e. two. "),
-    (119, "Three, i. e., four. "),
-    (139, "Five, i.e. six. "),
-    (155, "You have 4.2 messages. "),
-    (178, "Property access: `a.b.c`."),
+text = (
+    "“How do you know I’m mad?”, said Alice. “You must be,” said the Cat, "
+    "“or you wouldn’t have come here.”"
+)
+assert list(segmenter.segment(text)) == [
+    (0, "“How do you know I’m mad?”, said Alice. "),
+    (40, "“You must be,” said the Cat, “or you wouldn’t have come here.”"),
+]
+
+text = (
+    "此次学术会议汇聚了来自世界各地的茂盛植物被精心布置在各个工位之间无缝穿梭，相互配合，确保珍稀物种的"
+    "保存和景观似乎都闪烁着倒影。潮湿的泥土和新鲜雨水的抚慰，提醒我们注意自然循环中固有的平和节奏。随着大"
+    "幕拉开，剧院的灯光迎接着夜晚的到来，郊区生活的平静和安宁。"
+)
+assert list(segmenter.segment(text)) == [
+    (
+        0,
+        "此次学术会议汇聚了来自世界各地的茂盛植物被精心布置在各个工位之间无缝穿梭，相互配合，确保珍稀"
+        "物种的保存和景观似乎都闪烁着倒影。",
+    ),
+    (
+        63,
+        "潮湿的泥土和新鲜雨水的抚慰，提醒我们注意自然循环中固有的平和节奏。",
+    ),
+    (
+        96,
+        "随着大幕拉开，剧院的灯光迎接着夜晚的到来，郊区生活的平静和安宁。",
+    ),
+]
+
+text = (
+    "ሻጮች በሚያቀርቡት ድምፅ ሆኖ አገልግሏል፣ ይህም በረዶው ከቀለጠ በኋላ ጎብኚዎች ምቹ ጎጆ ከውጭው ዓለም "
+    "ሙሉ በሙሉ በወቅቱ አስማት ያበራ ይመስላል፣ በተጋገሩ ደስታዎች ላይ ተዘርግቷል ፣ የጨዋታ ድንኳኖች ተሞልተው "
+    "እያንዳንዱ ክፍል የክህሎት እና ተግሣጽ፣ በስብሰባው ላይ አፅንዖት ይሰጣል፣ ያለፈውን፣ ሸራዎችን እያስተካከሉ "
+    "እና ቅዝቃዜን ሰጥቷል። የተወሳሰቡ ቅርጻ ቅርጾች እና ከአዲስ የተጠበሰ ዳቦ መዓዛ ተሰብሳቢዎቹ እንዲዝናኑ "
+    "ይጋብዛሉ። አየሩ በሳር፣ በሁሉም ዝርዝር ውስጥ ፣በፈጠራ እና በእውቀት መሬቱን ይንከባከባሉ, ዲዛይኑ "
+    "በታማኝነት መፈጸሙን አረጋግጠዋል."
+)
+assert list(segmenter.segment(text)) == [
+    (
+        0,
+        "ሻጮች በሚያቀርቡት ድምፅ ሆኖ አገልግሏል፣ ይህም በረዶው ከቀለጠ በኋላ ጎብኚዎች ምቹ ጎጆ ከውጭው "
+        "ዓለም ሙሉ በሙሉ በወቅቱ አስማት ያበራ ይመስላል፣ በተጋገሩ ደስታዎች ላይ ተዘርግቷል ፣ የጨዋታ "
+        "ድንኳኖች ተሞልተው እያንዳንዱ ክፍል የክህሎት እና ተግሣጽ፣ በስብሰባው ላይ አፅንዖት ይሰጣል፣ "
+        "ያለፈውን፣ ሸራዎችን እያስተካከሉ እና ቅዝቃዜን ሰጥቷል። ",
+    ),
+    (
+        219,
+        "የተወሳሰቡ ቅርጻ ቅርጾች እና ከአዲስ የተጠበሰ ዳቦ መዓዛ ተሰብሳቢዎቹ እንዲዝናኑ ይጋብዛሉ። ",
+    ),
+    (
+        278,
+        "አየሩ በሳር፣ በሁሉም ዝርዝር ውስጥ ፣በፈጠራ እና በእውቀት መሬቱን ይንከባከባሉ, ዲዛይኑ በታማኝነት መፈጸሙን "
+        "አረጋግጠዋል.",
+    ),
 ]
 ```
